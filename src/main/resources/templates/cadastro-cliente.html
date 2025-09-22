@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Cliente</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        h1 { color: #333; }
+        form { max-width: 400px; }
+        label { display: block; margin-top: 15px; font-weight: bold; }
+        input { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+        button { margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+    </style>
+</head>
+<body>
+
+<h1>Cadastro de Cliente</h1>
+
+<form th:action="@{/cadastro-cliente}" th:object="${cliente}" method="post">
+
+    <label>Nome::</label>
+    <input type="text" th:field="*{nome}" required/>
+
+    <label>Telefone:</label>
+    <input type="text" th:field="*{telefone}" required/>
+
+    <label>Usuário:</label>
+    <p style="color: red; font-weight: bold;">Atenção! O usuário será salvo apenas com letras minúsculas.</p>
+    <input type="text"
+           th:field="*{usuario}"
+           required
+           pattern=".{8,}"
+           title="O usuario deve ter no minimo 8 letras" />
+
+    <label>Senha:</label>
+    <input type="password"
+           th:field="*{senha}"
+           required
+           pattern="(?=.*[A-Z]).{8,}"
+           title="A senha deve ter no mínimo 8 caracteres e conter pelo menos uma letra maiúscula" />
+
+    <button type="submit">Cadastrar</button>
+</form>
+
+</body>
+</html>
